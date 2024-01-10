@@ -123,8 +123,10 @@ function getStringsLength(arr) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(/* arr */) {
-  throw new Error('Not implemented');
+function getAverage(arr) {
+  if (arr.length === 0) return 0;
+  // return (arr.reduce((sum, v) => sum + v, 0) / arr.length).toFixed(2);
+  return arr.reduce((sum, v) => sum + v / arr.length, 0).toFixed(2);
 }
 
 /**
@@ -137,8 +139,11 @@ function getAverage(/* arr */) {
  *    isSameLength(['orange', 'banana', 'cherry']) => true
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
-function isSameLength(/* arr */) {
-  throw new Error('Not implemented');
+function isSameLength(arr) {
+  for (let i = 1; i < arr.length; i += 1) {
+    if (arr[i].length !== arr[0].length) return false;
+  }
+  return true;
 }
 
 /**
@@ -152,8 +157,11 @@ function isSameLength(/* arr */) {
  *    isValueEqualsIndex([2, 1, 0, 4, 5]) => true
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
-function isValueEqualsIndex(/* arr */) {
-  throw new Error('Not implemented');
+function isValueEqualsIndex(arr) {
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === i) return true;
+  }
+  return false;
 }
 
 /**
@@ -245,8 +253,12 @@ function toStringList(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const aRes = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (!aRes.includes(arr[i])) aRes.push(arr[i]);
+  }
+  return aRes;
 }
 
 /**
