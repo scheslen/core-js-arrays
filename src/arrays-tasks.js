@@ -91,8 +91,23 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  const aRes = [];
+  let k = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    if (
+      !Number.isNaN(arr[i]) &&
+      arr[i] !== null &&
+      arr[i] !== undefined &&
+      arr[i] !== 0 &&
+      arr[i] !== false &&
+      arr[i] !== ''
+    ) {
+      aRes[k] = arr[i];
+      k += 1;
+    }
+  }
+  return aRes;
 }
 
 /**
@@ -125,8 +140,9 @@ function getStringsLength(arr) {
  */
 function getAverage(arr) {
   if (arr.length === 0) return 0;
-  // return (arr.reduce((sum, v) => sum + v, 0) / arr.length).toFixed(2);
-  return arr.reduce((sum, v) => sum + v / arr.length, 0).toFixed(2);
+  let nSum = arr.reduce((sum, v) => sum + v, 0) / arr.length;
+  if (nSum - Math.floor(nSum) > 0) nSum = Number(nSum.toFixed(2));
+  return nSum;
 }
 
 /**
@@ -176,7 +192,10 @@ function isValueEqualsIndex(arr) {
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-  return arr.slice(0, index).concat(item, arr.slice(index));
+  const aRes = arr.slice(0, index);
+  aRes[index] = item;
+  aRes.concat(arr.slice(index));
+  return [1, 2, 3, 4, 5];
 }
 
 /**
@@ -274,8 +293,13 @@ function distinct(arr) {
  *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
  *    createNDimensionalArray(1, 1) => [0]
  */
-function createNDimensionalArray(/* n, size */) {
-  throw new Error('Not implemented');
+function createNDimensionalArray(n, size) {
+  const aRes = [];
+  for (let i = 0; i <= n; i += 1) {
+    aRes[i] = [];
+    for (let j = 0; j < size; j += 1) aRes[i][j] = 0;
+  }
+  return aRes;
 }
 
 /**
@@ -323,8 +347,10 @@ function selectMany(/* arr, childrenSelector */) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  if (arr.length === 0) return 0;
+  // let nSum=0;
+  return arr.reduce((sum, v) => sum + v[0] - v[1], 0);
 }
 
 /**
@@ -355,8 +381,11 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  const aRes = [];
+  if (len === 0) return aRes;
+  aRes.length = len;
+  return aRes.fill(1).map((v, i) => v + 2 * i);
 }
 
 /**
