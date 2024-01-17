@@ -416,8 +416,20 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  // if (arr.length === 0) return 0;
+  let nRes = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    if (
+      Number.isNaN(arr[i]) ||
+      arr[i] === null ||
+      arr[i] === undefined ||
+      arr[i] === false ||
+      arr[i] === ''
+    )
+      nRes = i;
+  }
+  return nRes;
 }
 
 /**
@@ -453,8 +465,12 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(arr) {
+  const aRes = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] % 2 > 0) aRes.push(i);
+  }
+  return aRes;
 }
 
 /**
@@ -485,8 +501,24 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const aRes = [];
+  let aArr = arr;
+  if (arr.length > 0 && n > 0) {
+    for (let k = 1; k <= n; k += 1) {
+      let m = 0;
+      let mMax = aArr[0];
+      for (let i = 1; i < aArr.length; i += 1) {
+        if (aArr[i] > mMax) {
+          m = i;
+          mMax = aArr[i];
+        }
+      }
+      aRes.push(aArr[m]);
+      aArr = aArr.slice(0, m) + aArr.slice(m + 1);
+    }
+  }
+  return aRes;
 }
 
 /**
@@ -501,8 +533,12 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  const aRes = [];
+  for (let i = 0; i < arr1.length; i += 1) {
+    if (arr2.includes(arr1[i])) aRes.push(arr1[i]);
+  }
+  return aRes;
 }
 
 /**
