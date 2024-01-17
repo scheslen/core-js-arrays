@@ -191,13 +191,16 @@ function isValueEqualsIndex(arr) {
  *    insertItem([ 1, 3, 4, 5 ], 2, 1)  => [ 1, 2, 3, 4, 5 ]
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(arr, item, index) {
-  const aRes = arr.slice(0, index);
-  aRes[index] = item;
-  aRes.concat(arr.slice(index));
-  return [1, 2, 3, 4, 5];
-}
+// function insertItem(arr, item, index) {
+//   // const aRes = arr.slice(0, index);
+//   // aRes[index] = item;
+//   // aRes.concat(arr.slice(index));
+//   return arr.slice(0, index).concat(item, arr.slice(index));
+// }
 
+function insertItem() {
+  throw new Error('Not implemented');
+}
 /**
  * Returns the n first items of the specified array.
  *
@@ -515,7 +518,8 @@ function getMaxItems(arr, n) {
         }
       }
       aRes.push(aArr[m]);
-      aArr = aArr.slice(0, m) + aArr.slice(m + 1);
+      if (m === 0) aArr = aArr.slice(1);
+      else aArr = aArr.slice(0, m) + aArr.slice(m + 1);
     }
   }
   return aRes;
