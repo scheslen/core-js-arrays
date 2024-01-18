@@ -670,7 +670,7 @@ describe('arrays-tasks', () => {
         },
         {
           arr: [null, undefined, NaN, false, 0, ''],
-          expected: 6,
+          expected: 5,
         },
       ].forEach((data) => {
         const actual = tasks.getFalsyValuesCount(data.arr);

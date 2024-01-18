@@ -420,19 +420,28 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
 function getFalsyValuesCount(arr) {
-  // if (arr.length === 0) return 0;
-  let nRes = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    if (
-      Number.isNaN(arr[i]) ||
-      arr[i] === null ||
-      arr[i] === undefined ||
-      arr[i] === false ||
-      arr[i] === ''
+  if (arr.length === 0) return 0;
+  // let nRes = 0;
+  // for (let i = 0; i < arr.length; i += 1) {
+  //   if (
+  //     Number.isNaN(arr[i]) ||
+  //     arr[i] === null ||
+  //     arr[i] === undefined ||
+  //     arr[i] === false ||
+  //     arr[i] === ''
+  //   )
+  //     nRes = i;
+  // }
+  return arr
+    .map(
+      (v, i) =>
+        Number.isNaN(arr[i]) ||
+        arr[i] === null ||
+        arr[i] === undefined ||
+        arr[i] === false ||
+        arr[i] === ''
     )
-      nRes = i;
-  }
-  return nRes;
+    .lastIndexOf(true);
 }
 
 /**
@@ -574,8 +583,15 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  if (arr.length <= 1) return arr;
+
+  const aRes = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j <= i; j += 1) aRes.push(arr[i]);
+  }
+
+  return aRes;
 }
 
 /**
@@ -591,8 +607,10 @@ function propagateItemsByPositionIndex(/* arr */) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  if (n === 0) return arr;
+  const m = n < 0 ? -n : arr.length - n;
+  return arr.slice(m).concat(arr.slice(0, m));
 }
 
 /**
@@ -631,8 +649,12 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length <= 1) return arr;
+  const m = Math.floor(arr.length / 2);
+  const aRes = arr.slice(arr.length - m);
+  if (arr.length % 2 > 0) aRes.push(arr[m]);
+  return aRes.concat(arr.slice(0, m));
 }
 
 module.exports = {
