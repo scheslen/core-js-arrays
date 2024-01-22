@@ -316,8 +316,15 @@ function createNDimensionalArray(n, size) {
  *    flattenArray(['a', ['b', ['c', 'd'], 'e'], 'f']) => ['a', 'b', 'c', 'd', 'e', 'f']
  *    flattenArray([1, 2, 3, 4]) => [1, 2, 3, 4]
  */
-function flattenArray(/* nestedArray */) {
-  throw new Error('Not implemented');
+function flattenArray(nestedArray) {
+  const aRes = [];
+
+  for (let i = 0; i <= nestedArray.length; i += 1) {
+    if (!Array.isArray(nestedArray[i])) aRes.push(nestedArray[i]);
+    else aRes.concat(flattenArray(nestedArray[i]));
+  }
+
+  return aRes;
 }
 
 /**
@@ -368,8 +375,12 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const aRes = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    aRes.push(arr.slice(i, i + chunkSize));
+  }
+  return aRes;
 }
 
 /**
@@ -432,16 +443,18 @@ function getFalsyValuesCount(arr) {
   //   )
   //     nRes = i;
   // }
-  return arr
-    .map(
-      (v, i) =>
-        Number.isNaN(arr[i]) ||
-        arr[i] === null ||
-        arr[i] === undefined ||
-        arr[i] === false ||
-        arr[i] === ''
-    )
-    .lastIndexOf(true);
+  return arr.reduce((sf, v) => (!v ? sf + 1 : sf), 0);
+
+  // .map(
+  //   (v, i) =>
+  //     Number.isNaN(arr[i]) ||
+  //     arr[i] === null ||
+  //     arr[i] === undefined ||
+  //     arr[i] === false ||
+  //     arr[i] === 0 ||
+  //     arr[i] === ''
+  // )
+  // .reduce((sf, f) => (f ? sf + 1 : sf), 0);
 }
 
 /**
