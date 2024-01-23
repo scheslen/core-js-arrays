@@ -309,11 +309,20 @@ function distinct(arr) {
  *    createNDimensionalArray(1, 1) => [0]
  */
 function createNDimensionalArray(n, size) {
-  const aRes = [];
-  for (let i = 0; i <= n; i += 1) {
-    aRes[i] = [];
-    for (let j = 0; j < size; j += 1) aRes[i][j] = 0;
+  let arr0 = [];
+  arr0.length = size;
+  arr0.fill(0);
+
+  let aRes = arr0;
+
+  for (let i = n; i > 1; i -= 1) {
+    aRes = [];
+    aRes.length = size;
+    aRes.fill(arr0);
+
+    arr0 = aRes;
   }
+
   return aRes;
 }
 
@@ -331,11 +340,14 @@ function createNDimensionalArray(n, size) {
 function flattenArray(nestedArray) {
   const aRes = [];
 
-  for (let i = 0; i <= nestedArray.length; i += 1) {
-    if (!Array.isArray(nestedArray[i])) aRes.push(nestedArray[i]);
-    else aRes.concat(flattenArray(nestedArray[i]));
+  function checkArr(arr) {
+    arr.forEach((item) => {
+      if (!Array.isArray(item)) aRes.push(item);
+      else checkArr(item);
+    });
   }
 
+  checkArr(nestedArray);
   return aRes;
 }
 
