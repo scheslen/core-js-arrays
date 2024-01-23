@@ -91,23 +91,35 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
+// function removeFalsyValues(arr) {
+//   const aRes = [];
+//   let k = 0;
+//   for (let i = 0; i < arr.length; i += 1) {
+//     if (
+//       !Number.isNaN(arr[i]) &&
+//       arr[i] !== null &&
+//       arr[i] !== undefined &&
+//       arr[i] !== 0 &&
+//       arr[i] !== false &&
+//       arr[i] !== ''
+//     ) {
+//       aRes[k] = arr[i];
+//       k += 1;
+//     }
+//   }
+//   return aRes;
+// }
+
 function removeFalsyValues(arr) {
-  const aRes = [];
-  let k = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    if (
-      !Number.isNaN(arr[i]) &&
-      arr[i] !== null &&
-      arr[i] !== undefined &&
-      arr[i] !== 0 &&
-      arr[i] !== false &&
-      arr[i] !== ''
-    ) {
-      aRes[k] = arr[i];
-      k += 1;
-    }
-  }
-  return aRes;
+  return arr.filter(
+    (v) =>
+      v !== null &&
+      v !== undefined &&
+      v !== 0 &&
+      v !== false &&
+      v !== '' &&
+      !Number.isNaN(v)
+  );
 }
 
 /**
@@ -198,8 +210,8 @@ function isValueEqualsIndex(arr) {
 //   return arr.slice(0, index).concat(item, arr.slice(index));
 // }
 
-function insertItem() {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  return arr.splice(index, 0, item);
 }
 /**
  * Returns the n first items of the specified array.
@@ -527,25 +539,32 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
 function getMaxItems(arr, n) {
-  const aRes = [];
-  let aArr = arr;
-  if (arr.length > 0 && n > 0) {
-    for (let k = 1; k <= n; k += 1) {
-      let m = 0;
-      let mMax = aArr[0];
-      for (let i = 1; i < aArr.length; i += 1) {
-        if (aArr[i] > mMax) {
-          m = i;
-          mMax = aArr[i];
-        }
-      }
-      aRes.push(aArr[m]);
-      if (m === 0) aArr = aArr.slice(1);
-      else aArr = aArr.slice(0, m) + aArr.slice(m + 1);
-    }
-  }
-  return aRes;
+  return arr.sort((a, b) => b - a).slice(0, n);
 }
+
+//   const aRes = [];
+//   let aArr = arr;
+//   if (arr.length > 0 && n > 0) {
+//     for (let k = 1; k <= n; k += 1) {
+//       let m = 0;
+//       let mMax = aArr[0];
+//       for (let i = 1; i < aArr.length; i += 1) {
+//         if (aArr[i] > mMax) {
+//           m = i;
+//           mMax = aArr[i];
+//         }
+//       }
+//       aRes.push(aArr[m]);
+//       if (m === 0) aArr = aArr.slice(1);
+//       else aArr = aArr.slice(0, m) + aArr.slice(m + 1);
+//     }
+//   }
+//   return aRes;
+// }
+
+// function get3TopItems(arr) {
+//   return arr.sort((a, b) => b - a).slice(0, 3);
+// }
 
 /**
  * Finds and returns an array containing only the common elements found in two arrays.
@@ -639,8 +658,24 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+
+function sortDigitNamesByNumericOrder(arr) {
+  const aDigit = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  return arr
+    .map((v) => aDigit.indexOf(v))
+    .sort((a, b) => a - b)
+    .map((i) => aDigit[i]);
 }
 
 /**
