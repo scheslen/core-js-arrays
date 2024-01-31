@@ -348,6 +348,8 @@ function flattenArray(nestedArray) {
   }
 
   checkArr(nestedArray);
+
+  // aRes = aRes.concat(item) if item === object(array) !'='
   return aRes;
 }
 
@@ -438,8 +440,12 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  let res = arr;
+  for (let i = 0; i < indices.length; i += 1) {
+    res = res[indices[i]];
+  }
+  return res;
 }
 
 /**
