@@ -167,10 +167,17 @@ function getAverage(arr) {
  *    isSameLength(['orange', 'banana', 'cherry']) => true
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
+// function isSameLength(arr) {
+//   for (let i = 1; i < arr.length; i += 1) {
+//     if (arr[i].length !== arr[0].length) return false;
+//   }
+//   return true;
+// }
 function isSameLength(arr) {
-  for (let i = 1; i < arr.length; i += 1) {
-    if (arr[i].length !== arr[0].length) return false;
-  }
+  const l = arr[0].length;
+  arr.forEach((v) => {
+    if (v.length !== l) return false;
+  })
   return true;
 }
 
@@ -211,7 +218,13 @@ function isValueEqualsIndex(arr) {
 // }
 
 function insertItem(arr, item, index) {
-  return arr.splice(index, 0, item);
+  // let aRes = arr;
+  const aRes = arr.splice(index, 0, item);
+  const aRes0 = arr;
+  aRes.forEach((v, i) => {
+    aRes0[i] = v;
+  });
+  return aRes0;
 }
 /**
  * Returns the n first items of the specified array.
@@ -366,7 +379,10 @@ function flattenArray(nestedArray) {
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
+function selectMany() {
+  // function selectMany(/*arr, childrenSelector*/) {
+  // const aRes = arr.forEach(childrenSelector);
+  // return flattenArray(aRes);
   throw new Error('Not implemented');
 }
 
@@ -538,8 +554,14 @@ function getIndicesOfOddNumbers(arr) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  if (arr.length === 0) return [];
+  const aRes = [];
+  arr.forEach(function (v) {
+    const n16 = v.toString(16).toUpperCase();
+    aRes.push(`#${'0'.repeat(6 - n16.length)}${n16}`);
+  });
+  return aRes;
 }
 
 /**
