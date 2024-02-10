@@ -557,7 +557,7 @@ function getIndicesOfOddNumbers(arr) {
 function getHexRGBValues(arr) {
   if (arr.length === 0) return [];
   const aRes = [];
-  arr.forEach(function (v) {
+  arr.forEach(function vvv(v) {
     const n16 = v.toString(16).toUpperCase();
     aRes.push(`#${'0'.repeat(6 - n16.length)}${n16}`);
   });
