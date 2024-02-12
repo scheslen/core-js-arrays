@@ -530,17 +530,17 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
+  if (n === 1) return [[1]];
   const aRes = [];
   aRes.length = n;
-  aRes.fill(([].length = n));
-  // for (const l in aRes) {
-  //   aRes[l].length = n;
-  // }
-  // aRes.forEach((v) => {
-  //   v.length = n;
-  //   v.fill(0);
-  // });
-  aRes.map((v, i) => (i % (n + 1) === 0 ? 1 : 0));
+  for (let l = 0; l < n; l += 1) {
+    aRes[l] = [];
+    aRes[l].length = n;
+    aRes[l].fill(0);
+    for (let i = 0; i < n; i += 1) {
+      if (i === l) aRes[l][i] = 1;
+    }
+  }
   return aRes;
 }
 
@@ -656,8 +656,19 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let lMaxMax = 0;
+  let lMax = 1;
+  let vPrev = nums[0];
+  for (let i = 1; i < nums.length; i += 1) {
+    if (nums[i] > vPrev) lMax += 1;
+    else {
+      lMaxMax = lMax > lMaxMax ? lMax : lMaxMax;
+      lMax = 1;
+    }
+    vPrev = nums[i];
+  }
+  return lMaxMax;
 }
 
 /**
