@@ -309,11 +309,11 @@ function distinct(arr) {
 }
 
 /**
- * Creates an n-dimensional array and fills it with zeros.
+ * Creates an n-dimensional array and s it with zeros.
  *
  * @param {number} n - Depth of outter array (n > 0).
  * @param {number} size - Length of all arrays (size > 0).
- * @return {array} - The n-dimensional array filled with zeros.
+ * @return {array} - The n-dimensional array ed with zeros.
  *
  * @example
  *    createNDimensionalArray(2, 3) => [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -379,11 +379,19 @@ function flattenArray(nestedArray) {
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany() {
-  // function selectMany(/*arr, childrenSelector*/) {
-  // const aRes = arr.forEach(childrenSelector);
-  // return flattenArray(aRes);
-  throw new Error('Not implemented');
+// function selectMany() {
+// function selectMany(arr, childrenSelector) {
+//   const aRes = [];
+//   arr.forEach((v) => {
+//     aRes.push(childrenSelector(v));
+//   });
+//   const aRes0 = flattenArray(aRes);
+//   return aRes0;
+//   // throw new Error('Not implemented');
+// }
+
+function selectMany(arr, childrenSelector) {
+  return flattenArray(arr.map((v) => childrenSelector(v)));
 }
 
 /**
@@ -521,8 +529,19 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const aRes = [];
+  aRes.length = n;
+  aRes.fill(([].length = n));
+  // for (const l in aRes) {
+  //   aRes[l].length = n;
+  // }
+  // aRes.forEach((v) => {
+  //   v.length = n;
+  //   v.fill(0);
+  // });
+  aRes.map((v, i) => (i % (n + 1) === 0 ? 1 : 0));
+  return aRes;
 }
 
 /**
